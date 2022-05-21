@@ -1,0 +1,5 @@
+/run/initialize
+/gun/particle pi0
+/gun/position 0 0 -2 m
+/gun/direction 0 0 1
+/run/beamOn 100
