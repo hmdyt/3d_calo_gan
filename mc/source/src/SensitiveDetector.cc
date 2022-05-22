@@ -28,7 +28,7 @@ SensitiveDetector::~SensitiveDetector(){}
 
 void SensitiveDetector::initTree(){
     tree = new TTree("tree", "mc output");
-    tree->Branch("eDep", &eDep);
+    tree->Branch("eDep", eDep, TString::Format("eDep[%d]/D", n_split * n_split * n_split).Data());
     tree->Branch("n_split", &n_split_tree);
 }
 
