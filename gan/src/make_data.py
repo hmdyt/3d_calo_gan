@@ -34,18 +34,21 @@ class DataMaker:
     def save_parallel(self):
         with ProcessPoolExecutor(max_workers=self._max_workers) as executor:
             n_iter = self._eDep_s.shape[0]
-            tqdm(executor.map(
-                make_one_event_pickle,
-                self._eDep_s,
-                [f'{self._output_dir}{time.time()}.pickle' for i in range(n_iter)],
-                [self._n_split for i in range(n_iter)]
-            ))
+            tqdm(
+                executor.map(
+                    make_one_event_pickle,
+                    self._eDep_s,
+                    [f'{self._output_dir}{time.time()}.pickle' for i in range(n_iter)],
+                    [self._n_split for i in range(n_iter)]
+                ),
+                total=n_iter
+            )
 
 if __name__ == '__main__':
     arg_parser = argparse.ArgumentParser()
-    argparser.add_argument('rootfile_path', type=str)
-    argparser.add_argument('output_dir', type=str)
-    argparser.add_argument('-p', '--max_workers', type=int, default=1)
+    arg_parser.add_argument('rootfile_path', type=str)
+    arg_parser.add_argument('output_dir', type=str)
+    arg_parser.add_argument('-p', '--max_workers', type=int, default=1)
     args = arg_parser.parse_args()
     
     data_maker = DataMaker(args.rootfile_path, args.output_dir, args.max_workers)
