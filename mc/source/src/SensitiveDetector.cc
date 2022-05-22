@@ -70,8 +70,8 @@ G4bool SensitiveDetector::ProcessHits(G4Step* aStep, G4TouchableHistory*)
 void SensitiveDetector::EndOfEvent(G4HCofThisEvent*)
 {
     tree->Fill();
-    // save 100 man event
-    if (i_event % 1000000 == 0 && i_event != 0){
+    // save each 10^5 events
+    if (i_event % 100000 == 0 && i_event != 0){
         saveTTreeAsRootFile();
         G4cout << "saved tree" << i_tree << G4endl;
         i_tree++;
