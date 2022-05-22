@@ -32,7 +32,7 @@ class SensitiveDetector : public G4VSensitiveDetector
         TFile* tfile;
         std::vector<G4double> eDep;
         static const G4int n_split = (G4int) Geometry::n_split;
-        G4double eDepIndex[n_split][n_split][n_split];
+        G4int n_split_tree;
         G4int i_event;
         G4int n_events;
         G4int i_tree;
