@@ -1,0 +1,10 @@
+{
+    "run": [
+        {
+            "particle": "e-",
+            "energy": "100 MeV",
+            "num": "10000",
+            "outfile": "data/electron_100MeV"
+        }
+    ]
+}
