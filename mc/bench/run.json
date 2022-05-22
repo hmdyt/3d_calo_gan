@@ -1,0 +1,100 @@
+{
+    "run": [
+        {
+            "particle": "e-",
+            "energy": "100 MeV",
+            "num": "2000000",
+            "outfile": "data/electron_100MeV"
+        },
+        {
+            "particle": "e-",
+            "energy": "500 MeV",
+            "num": "2000000",
+            "outfile": "data/electron_500MeV"
+        },
+        {
+            "particle": "e-",
+            "energy": "1 GeV",
+            "num": "2000000",
+            "outfile": "data/electron_1GeV"
+        },
+        {
+            "particle": "e-",
+            "energy": "10 GeV",
+            "num": "2000000",
+            "outfile": "data/electron_10GeV"
+        },
+        {
+            "particle": "e-",
+            "energy": "50 GeV",
+            "num": "2000000",
+            "outfile": "data/electron_50GeV"
+        },
+        {
+            "particle": "e-",
+            "energy": "100 GeV",
+            "num": "2000000",
+            "outfile": "data/electron_100GeV"
+        },
+        {
+            "particle": "e-",
+            "energy": "200 GeV",
+            "num": "2000000",
+            "outfile": "data/electron_200GeV"
+        },
+        {
+            "particle": "e-",
+            "energy": "500 GeV",
+            "num": "2000000",
+            "outfile": "data/electron_500GeV"
+        },
+        {
+            "particle": "pi0",
+            "energy": "300 MeV",
+            "num": "2000000",
+            "outfile": "data/pizero_300MeV"
+        },
+        {
+            "particle": "pi0",
+            "energy": "500 MeV",
+            "num": "2000000",
+            "outfile": "data/pizero_500MeV"
+        },
+        {
+            "particle": "pi0",
+            "energy": "1 GeV",
+            "num": "2000000",
+            "outfile": "data/pizero_1GeV"
+        },
+        {
+            "particle": "pi0",
+            "energy": "10 GeV",
+            "num": "2000000",
+            "outfile": "data/pizero_10GeV"
+        },
+        {
+            "particle": "pi0",
+            "energy": "50 GeV",
+            "num": "2000000",
+            "outfile": "data/pizero_50GeV"
+        },
+        {
+            "particle": "pi0",
+            "energy": "100 GeV",
+            "num": "2000000",
+            "outfile": "data/pizero_100GeV"
+        },
+        {
+            "particle": "pi0",
+            "energy": "200 GeV",
+            "num": "2000000",
+            "outfile": "data/pizero_200GeV"
+        },
+        {
+            "particle": "pi0",
+            "energy": "500 GeV",
+            "num": "2000000",
+            "outfile": "data/pizero_500GeV"
+        }
+    ]
+}

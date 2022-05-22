@@ -131,7 +131,10 @@ dmypy.json
 # mc
 mc/bin
 mc/build
-mc/bench/*.root
+mc/bench/**/*.root
+mc/bench/**/*.mac
+mc/bench/**/*.log
+mc/bench/**/*.out
 
 # vscode
 .vscode/
