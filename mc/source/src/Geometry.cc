@@ -64,7 +64,11 @@ G4LogicalVolume* Geometry::constructPbPixel(G4double leng_X_Pixel, G4double leng
 G4VPhysicalVolume* Geometry::Construct()
 {
    G4LogicalVolume* logVol_World = constructLogWorld();
-   G4LogicalVolume* logVol_PbGlassScinti = constructPbPixel(10.0 * cm, 10.0 * cm, 10.0 * cm);
+   G4double outer_box_length = 10.0 * cm;
+   G4double leng_X_Pixel = outer_box_length/ n_split;
+   G4double leng_Y_Pixel = outer_box_length/ n_split;
+   G4double leng_Z_Pixel = outer_box_length/ n_split;
+   G4LogicalVolume* logVol_PbGlassScinti = constructPbPixel(leng_X_Pixel, leng_Y_Pixel, leng_Z_Pixel);
 
    // sensitive detector set
    SensitiveDetector* sensitiveDetector = new SensitiveDetector("SensitiveDetector");
@@ -85,15 +89,12 @@ G4VPhysicalVolume* Geometry::Construct()
       );
 
    // placement Pb
-   G4double leng_X_Pixel = 10.0 * cm / n_split;
-   G4double leng_Y_Pixel = 10.0 * cm / n_split;
-   G4double leng_Z_Pixel = 10.0 * cm / n_split;
    for (G4int ix = 0; ix < n_split; ix++) {
       for (G4int iy = 0; iy < n_split; iy++) {
          for (G4int iz = 0; iz < n_split; iz++) {
-            G4double pos_X_Pixel = -5.0 * cm + ix * leng_X_Pixel;
-            G4double pos_Y_Pixel = -5.0 * cm + iy * leng_Y_Pixel;
-            G4double pos_Z_Pixel = -5.0 * cm + iz * leng_Z_Pixel;
+            G4double pos_X_Pixel = - outer_box_length / 2.0 + ix * leng_X_Pixel + leng_X_Pixel / 2.0;
+            G4double pos_Y_Pixel = - outer_box_length / 2.0 + iy * leng_Y_Pixel + leng_Y_Pixel / 2.0;
+            G4double pos_Z_Pixel = - outer_box_length / 2.0 + iz * leng_Z_Pixel + leng_Z_Pixel / 2.0;
             G4int copyNum_Pb = ix * n_split * n_split + iy * n_split + iz + copyNum_Pb_offset;
             new G4PVPlacement(
                G4Transform3D(

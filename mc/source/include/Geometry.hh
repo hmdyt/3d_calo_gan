@@ -16,7 +16,7 @@ class Geometry : public G4VUserDetectorConstruction
     G4VPhysicalVolume* Construct();
 
     constexpr static G4double n_split = 25; // means 25*25*25 = 15625 pixels
-    constexpr static G4int copyNum_Pb_offset = 1000;
+    constexpr static G4int copyNum_Pb_offset = 1000000;
 
   private:
     G4NistManager* materi_Man;
