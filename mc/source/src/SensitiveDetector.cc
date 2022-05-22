@@ -51,9 +51,8 @@ void SensitiveDetector::saveTTreeAsRootFile()
 
 void SensitiveDetector::Initialize(G4HCofThisEvent*)
 {   
-    eDep = std::vector<G4double>(n_split * n_split * n_split);
     n_split_tree = n_split;
-    for (G4int i = 0; i < n_split; i++) eDep.at(0) = 0;
+    for (G4int i = 0; i < n_split; i++) eDep[0] = 0;
 }
 
 G4bool SensitiveDetector::ProcessHits(G4Step* aStep, G4TouchableHistory*)
@@ -64,7 +63,7 @@ G4bool SensitiveDetector::ProcessHits(G4Step* aStep, G4TouchableHistory*)
         ->GetCopyNo();
     copy_number -= Geometry::copyNum_Pb_offset;
     G4double a_edep = aStep->GetTotalEnergyDeposit() / eV;
-    eDep.at(copy_number) += a_edep;
+    eDep[copy_number] += a_edep;
     return true;
 }
 
