@@ -135,3 +135,7 @@ mc/bench/*.root
 
 # vscode
 .vscode/
+
+# gan
+gan/notebook
+gan/data
