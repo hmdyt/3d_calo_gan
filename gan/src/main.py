@@ -19,10 +19,13 @@ def main():
     argparser.add_argument('-f', '--feature_map', type=int, default=512)
     argparser.add_argument('-g', '--use_gpu_core', type=int, default=0)
     argparser.add_argument('-o', '--optimizer', type=str, default='Adam', choices=['Adam', 'RMSprop'])
+    argparser.add_argument('--subset', type=float, default=1)
     args = argparser.parse_args()
     
     dataset = DataSetECAL(args.data_dir)
-    # dataset_partial = torch.utils.data.Subset(dataset, range(0, 10))
+    if args.subset != 1:
+        dataset = torch.utils.data.Subset(dataset, range(int(len(dataset) * args.subset)))
+        
     train_loader = torch.utils.data.DataLoader(
         # dataset_partial,
         dataset,
