@@ -22,8 +22,10 @@ class Conv3DGAN:
         fixed_data,
         record_dir,
         feature_map,
+        use_gpu_core,
+        optimizer,
     ):
-        self._device = torch.device("cuda:1" if torch.cuda.is_available() else "cpu")
+        self._device = torch.device(f"cuda:{use_gpu_core}" if torch.cuda.is_available() else "cpu")
         self._n_epochs = n_epochs
         self._latent_dim = latent_dim
         self._lr_G = lr_G
@@ -34,6 +36,10 @@ class Conv3DGAN:
         self._fixed_data = fixed_data.float().to(self._device)
         self._record_dir = record_dir
         self._feature_map = feature_map
+        self._optimizer = optimizer
+        print('##########################')
+        print(f"Device: {self._device}")
+        print('##########################')
         # record dir
         if self._record_dir[-1] != "/":
             self._record_dir = self._record_dir + "/"
@@ -43,8 +49,12 @@ class Conv3DGAN:
         self._D = Discriminator(self._feature_map).to(self._device)
         # criterion, optimizer
         self._criterion = nn.BCELoss()
-        self._G_optim = torch.optim.Adam(self._G.parameters(), lr=self._lr_G, betas=(self._beta, self._beta))
-        self._D_optim = torch.optim.Adam(self._D.parameters(), lr=self._lr_D, betas=(self._beta, self._beta))
+        if self._optimizer == "Adam":
+            self._G_optim = torch.optim.Adam(self._G.parameters(), lr=self._lr_G, betas=(self._beta, self._beta))
+            self._D_optim = torch.optim.Adam(self._D.parameters(), lr=self._lr_D, betas=(self._beta, self._beta))
+        elif self._optimizer == "RMSprop":
+            self._G_optim = torch.optim.RMSprop(self._G.parameters(), lr=self._lr_G)
+            self._D_optim = torch.optim.RMSprop(self._D.parameters(), lr=self._lr_D)
         # for record
         self._loss_G = []
         self._loss_D = []

@@ -17,6 +17,8 @@ def main():
     argparser.add_argument('-r', '--record_dir', type=str, default=f'record/{time.time()}')
     argparser.add_argument('-d', '--data_dir', type=str)
     argparser.add_argument('-f', '--feature_map', type=int, default=512)
+    argparser.add_argument('-g', '--use_gpu_core', type=int, default=0)
+    argparser.add_argument('-o', '--optimizer', type=str, default='Adam', choices=['Adam', 'RMSprop'])
     args = argparser.parse_args()
     
     dataset = DataSetECAL(args.data_dir)
@@ -41,6 +43,8 @@ def main():
         feature_map=args.feature_map,
         fixed_z=fixed_z,
         fixed_data=fixed_data,
+        use_gpu_core=args.use_gpu_core,
+        optimizer=args.optimizer,
     )
     
     gan.train(train_loader)
