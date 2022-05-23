@@ -23,16 +23,20 @@ def draw_sample(xyz, ax):
                 counter += 1
                 
     marker_size = (e / np.linalg.norm(e)) ** 2
-    print(f'e.sum() = {e.sum()}, marker_size.sum() = {marker_size.sum()}')
     img = ax.scatter(x, y, z, c=e, s=marker_size*500, cmap='jet')
     #ax.colorbar(img)
 
-def draw_some_samples(xyz_s, n_show=4, savepath, figsize=(10, 10)):
+def save_some_samples(xyz_s, fixed_data, savepath, figsize=(10, 10)):
+    N_SHOW = 9
     batch_size = xyz_s.shape[0]
-    if batch_size < n_show:
-        raise ValueError('batch_size must be larger than n_show')
+    if batch_size < N_SHOW - 1:
+        raise ValueError('batch_size must be larger than n_show - 1')
     fig = plt.figure(figsize=figsize)
-    for i in range(n_show):
-        ax = fig.add_subplot(1, 4, i+1, projection='3d')
-        draw_sample(xyz_s[i], ax)
+    for i in range(N_SHOW):
+        ax = fig.add_subplot(3, 3, i+1, projection='3d')
+        ax.set_axis_off()
+        if i == N_SHOW - 1:
+            draw_sample(fixed_data, ax)
+        else: 
+            draw_sample(xyz_s[i], ax)
     fig.savefig(savepath)
