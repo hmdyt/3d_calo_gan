@@ -24,6 +24,7 @@ class Conv3DGAN:
         feature_map,
         use_gpu_core,
         optimizer,
+        dropout_rate,
     ):
         self._device = torch.device(f"cuda:{use_gpu_core}" if torch.cuda.is_available() else "cpu")
         self._n_epochs = n_epochs
@@ -37,6 +38,7 @@ class Conv3DGAN:
         self._record_dir = record_dir
         self._feature_map = feature_map
         self._optimizer = optimizer
+        self._dropout_rate = dropout_rate
         print('##########################')
         print(f"Device: {self._device}")
         print('##########################')
@@ -46,7 +48,7 @@ class Conv3DGAN:
         os.makedirs(self._record_dir, exist_ok=True)
         # model
         self._G = Generator(self._feature_map, self._latent_dim).to(self._device)
-        self._D = Discriminator(self._feature_map).to(self._device)
+        self._D = Discriminator(self._feature_map, dropout_rate=self._dropout_rate).to(self._device)
         # criterion, optimizer
         self._criterion = nn.BCELoss()
         if self._optimizer == "Adam":

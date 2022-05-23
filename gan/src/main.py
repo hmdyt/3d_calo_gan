@@ -20,6 +20,7 @@ def main():
     argparser.add_argument('-g', '--use_gpu_core', type=int, default=0)
     argparser.add_argument('-o', '--optimizer', type=str, default='Adam', choices=['Adam', 'RMSprop'])
     argparser.add_argument('--subset', type=float, default=1)
+    argparser.add_argument('--dropout_rate', type=float, default=0.0)
     args = argparser.parse_args()
     
     dataset = DataSetECAL(args.data_dir)
@@ -48,6 +49,7 @@ def main():
         fixed_data=fixed_data,
         use_gpu_core=args.use_gpu_core,
         optimizer=args.optimizer,
+        dropout_rate=args.dropout_rate,
     )
     
     gan.train(train_loader)

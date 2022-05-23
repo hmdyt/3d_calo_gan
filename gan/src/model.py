@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 
 class Discriminator(nn.Module):
-    def __init__(self, n_feature_map=512):
+    def __init__(self, n_feature_map=512, dropout_rate=0.0):
         super(Discriminator, self).__init__()
         conv1_channels = int(n_feature_map / 8)
         conv2_channels = int(n_feature_map / 4)
@@ -16,7 +16,7 @@ class Discriminator(nn.Module):
                 nn.LeakyReLU(0.2, inplace=True),
                 nn.BatchNorm3d(out_channels),
             )
-            
+        self._dropout = nn.Dropout(dropout_rate)
         # input (batch_size, 1, 25, 25, 25)
         # output (batch_size, conv1_channels, 23, 23, 23)
         self._conv1 = conv_block(1, conv1_channels)
@@ -37,9 +37,13 @@ class Discriminator(nn.Module):
         )
         
     def forward(self, x):
+        x = self._dropout(x)
         x = self._conv1(x)
+        x = self._dropout(x)
         x = self._conv2(x)
+        x = self._dropout(x)
         x = self._conv3(x)
+        x = self._dropout(x)
         x = self._conv4(x)
         x = x.view(-1, 17 * 17 * 17 * self._conv4_channels) # FIXME: hardcoded
         x = self._linear(x)
