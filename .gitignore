@@ -142,3 +142,4 @@ mc/bench/**/*.out
 # gan
 gan/notebook
 gan/data
+gan/record
