@@ -13,7 +13,7 @@
             "record_dir": "./record/electron1GeV_01",
             "data_dir": "./data/dataloader/electron_1GeV_0",
             "feature_map": 512,
-            "use_gpu_core": 0,
+            "use_gpu_core": 1,
             "optimizer": "Adam"
         },
         {
@@ -28,7 +28,7 @@
             "record_dir": "./record/electron1GeV_02",
             "data_dir": "./data/dataloader/electron_1GeV_0",
             "feature_map": 512,
-            "use_gpu_core": 0,
+            "use_gpu_core": 1,
             "optimizer": "Adam"
         },
         {
@@ -43,7 +43,7 @@
             "record_dir": "./record/electron1GeV_03",
             "data_dir": "./data/dataloader/electron_1GeV_0",
             "feature_map": 512,
-            "use_gpu_core": 0,
+            "use_gpu_core": 1,
             "optimizer": "Adam"
         },
         {
@@ -58,7 +58,7 @@
             "record_dir": "./record/electron1GeV_04",
             "data_dir": "./data/dataloader/electron_1GeV_0",
             "feature_map": 512,
-            "use_gpu_core": 0,
+            "use_gpu_core": 1,
             "optimizer": "Adam"
         },
         {
@@ -73,7 +73,7 @@
             "record_dir": "./record/electron1GeV_05",
             "data_dir": "./data/dataloader/electron_1GeV_0",
             "feature_map": 512,
-            "use_gpu_core": 0,
+            "use_gpu_core": 1,
             "optimizer": "RMSprop"
         },
         {
@@ -88,7 +88,7 @@
             "record_dir": "./record/electron1GeV_05",
             "data_dir": "./data/dataloader/electron_1GeV_0",
             "feature_map": 512,
-            "use_gpu_core": 0,
+            "use_gpu_core": 1,
             "optimizer": "RMSprop"
         }
     ]
