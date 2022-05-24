@@ -25,6 +25,7 @@ class Conv3DGAN:
         use_gpu_core,
         optimizer,
         dropout_rate,
+        generator_train_rate,
     ):
         self._device = torch.device(f"cuda:{use_gpu_core}" if torch.cuda.is_available() else "cpu")
         self._n_epochs = n_epochs
@@ -39,6 +40,7 @@ class Conv3DGAN:
         self._feature_map = feature_map
         self._optimizer = optimizer
         self._dropout_rate = dropout_rate
+        self._generator_train_rate = int(generator_train_rate)
         print('##########################')
         print(f"Device: {self._device}")
         print('##########################')
@@ -95,14 +97,15 @@ class Conv3DGAN:
                 ##############################
                 # train G
                 ##############################
-                z_noise = torch.randn(batch_size, self._latent_dim, device=self._device)
-                data_fake = self._G(z_noise).view(batch_size, 1, 25, 25, 25)
-                d_out_fake = self._D(data_fake)
-                g_loss = self._criterion(d_out_fake, label_real)
-                self._D.zero_grad()
-                self._G.zero_grad()
-                g_loss.backward()
-                self._G_optim.step()
+                for i_G_train in range(self._generator_train_rate):
+                    z_noise = torch.randn(batch_size, self._latent_dim, device=self._device)
+                    data_fake = self._G(z_noise).view(batch_size, 1, 25, 25, 25)
+                    d_out_fake = self._D(data_fake)
+                    g_loss = self._criterion(d_out_fake, label_real)
+                    self._D.zero_grad()
+                    self._G.zero_grad()
+                    g_loss.backward()
+                    self._G_optim.step()
                 ## record
                 self._loss_G.append(g_loss.item())
                 self._loss_D.append(d_loss.item())
