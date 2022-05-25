@@ -112,7 +112,9 @@ class Conv3DGAN:
                 self._record_loss()
                 self._i_iter += 1
             self._record_data(epoch)
-
+            self._save_model(epoch)
+        self._save_loss_pickle()
+        
     def _record_loss(self):
         axis_array = list(range(len(self._loss_G)))
         plt.plot(axis_array, self._loss_G, label="Generator")
@@ -122,6 +124,10 @@ class Conv3DGAN:
         plt.cla()
         plt.clf()
         plt.close()
+    
+    def _save_loss_pickle(self):
+        with open(f'{self._record_dir}loss.pickle', 'wb') as f:
+            pickle.dump([self._loss_G, self._loss_D], f)
     
     def _record_data(self, epoch):
         save_dir = self._record_dir + "generated/"
@@ -133,3 +139,10 @@ class Conv3DGAN:
         plt.cla()
         plt.clf()
         plt.close()
+        
+    def _save_model(self, epoch):
+        save_dir = self._record_dir + "model/"
+        if not os.path.exists(save_dir):
+            os.makedirs(save_dir, exist_ok=True)
+        torch.save(self._G.state_dict(), f'{save_dir}G_{epoch}epoch.pth')
+        torch.save(self._D.state_dict(), f'{save_dir}D_{epoch}epoch.pth')
